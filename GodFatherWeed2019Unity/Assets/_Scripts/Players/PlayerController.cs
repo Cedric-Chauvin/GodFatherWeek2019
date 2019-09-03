@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static List<PlayerController> _players = new List<PlayerController>();
+
     Rigidbody rigidBody;
     Camera viewCamera;
 
     public float moveSpeed = 10.0f;
 
+    private void Awake()
+    {
+        PlayerController._players.Add(this);
+    }
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
         viewCamera = Camera.main;
-        //	Cursor.visible = false;
     }
 
     void Update()
