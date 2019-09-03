@@ -13,11 +13,10 @@ public class PlayerController : MonoBehaviour
     public int playerNumber { get; private set; } = 1;
 
     [Header("Input related settings")]
-    [Range(0.01f, 0.3f)]
-    public float deadzone = 0.1f;
     public bool keyboard = false;
 
     [Header("Movement related settings")]
+    public float deadzone = 0.1f;
     [Range(1f, 20f)]
     public float moveSpeed = 10.0f;
 
@@ -34,41 +33,51 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // Player rotation towards mouse
-
-        Vector3 cursorScreenPoint = Input.mousePosition;
-        Vector3 playerScreenPoint = viewCamera.WorldToScreenPoint(transform.position);
-
-        // Z axis removed as it's the distance to the camera
-        playerScreenPoint = new Vector3(playerScreenPoint.x, playerScreenPoint.y, 0f);
-
-        Vector3 aim = (cursorScreenPoint - playerScreenPoint).normalized;
-
-        // Screen XY is world XZ
-        aim = new Vector3(aim.x, 0f, aim.y);
-
-        transform.rotation = Quaternion.LookRotation(aim);
-
         // Player movement
 
-        float inputHorizontal = 0f;
-        float inputVertical = 0f;
+        float inputHorizontal;
+        float inputVertical;
+        Vector3 aim;
 
-        if (!keyboard)
+        if (!keyboard) // TWO JOYSTICKS
         {
             inputHorizontal = Input.GetAxis("P" + playerNumber + "_Horizontal");
             inputVertical = Input.GetAxis("P" + playerNumber + "_Vertical");
 
-            inputHorizontal = Mathf.Abs(inputHorizontal) > deadzone ? inputHorizontal : 0f;
-            inputVertical = Mathf.Abs(inputVertical) > deadzone ? inputVertical : 0f;
+            float inputRightHorizontal = Input.GetAxis("P" + playerNumber + "_Horizontal_Right");
+            float inputRightVertical = Input.GetAxis("P" + playerNumber + "_Vertical_Right");
+
+            aim = new Vector3(inputRightHorizontal, 0f, inputRightVertical);
+
+            // Applying rotation
+            if (aim.magnitude > deadzone)
+                transform.rotation = Quaternion.LookRotation(aim);
         }
-        else
+        else // KEYBOARD
         {
+            // Player rotation towards mouse
+
+            Vector3 cursorScreenPoint = Input.mousePosition;
+            Vector3 playerScreenPoint = viewCamera.WorldToScreenPoint(transform.position);
+
+            // Z axis removed as it's the distance to the camera
+            playerScreenPoint = new Vector3(playerScreenPoint.x, playerScreenPoint.y, 0f);
+
+            aim = (cursorScreenPoint - playerScreenPoint).normalized;
+
+            // Screen XY is world XZ
+            aim = new Vector3(aim.x, 0f, aim.y);
+
+            // Player movement
+
             inputHorizontal = Input.GetAxis("KB_Horizontal");
             inputVertical = Input.GetAxis("KB_Vertical");
-        }
-        
 
+            // Applying rotation
+            transform.rotation = Quaternion.LookRotation(aim);
+        }
+
+        // Applying movement
         rigidBody.velocity = new Vector3(inputVertical * moveSpeed, 0.0f, inputHorizontal * -moveSpeed);
     }
 

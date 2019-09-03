@@ -14,7 +14,7 @@ InputManager:
     altNegativeButton: q
     altPositiveButton: d
     gravity: 3
-    dead: 0.001
+    dead: 0.15
     sensitivity: 3
     snap: 1
     invert: 0
@@ -30,7 +30,7 @@ InputManager:
     altNegativeButton: q
     altPositiveButton: d
     gravity: 3
-    dead: 0.001
+    dead: 0.15
     sensitivity: 3
     snap: 1
     invert: 0
@@ -62,7 +62,7 @@ InputManager:
     altNegativeButton: s
     altPositiveButton: z
     gravity: 3
-    dead: 0.001
+    dead: 0.15
     sensitivity: 3
     snap: 1
     invert: 1
@@ -78,7 +78,7 @@ InputManager:
     altNegativeButton: s
     altPositiveButton: z
     gravity: 3
-    dead: 0.001
+    dead: 0.15
     sensitivity: 3
     snap: 1
     invert: 1
@@ -101,6 +101,70 @@ InputManager:
     type: 0
     axis: 1
     joyNum: 0
+  - serializedVersion: 3
+    m_Name: P1_Horizontal_Right
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: 0.001
+    sensitivity: 0.4
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 3
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: P2_Horizontal_Right
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: 0.001
+    sensitivity: 0.4
+    snap: 0
+    invert: 0
+    type: 2
+    axis: 3
+    joyNum: 2
+  - serializedVersion: 3
+    m_Name: P1_Vertical_Right
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: 0.001
+    sensitivity: 0.4
+    snap: 0
+    invert: 1
+    type: 2
+    axis: 4
+    joyNum: 1
+  - serializedVersion: 3
+    m_Name: P2_Vertical_Right
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 0
+    dead: 0.001
+    sensitivity: 0.4
+    snap: 0
+    invert: 1
+    type: 2
+    axis: 4
+    joyNum: 2
   - serializedVersion: 3
     m_Name: Fire1
     descriptiveName: 
