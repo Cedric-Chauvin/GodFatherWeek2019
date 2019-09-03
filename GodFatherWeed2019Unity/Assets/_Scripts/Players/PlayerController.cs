@@ -4,39 +4,76 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody rigidBody;
-    Camera viewCamera;
-    Vector3 velocity;
-    public Transform gun;
-    public Rigidbody Bullet;
+    public static List<PlayerController> _players = new List<PlayerController>();
 
+    private Rigidbody rigidBody;
+    private Camera viewCamera;
+
+    [field: Header("Number of the player, corresponds to the controller"), SerializeField]
+    public int playerNumber { get; private set; } = 1;
+
+    [Header("Input related settings")]
+    [Range(0.01f, 0.3f)]
+    public float deadzone = 0.1f;
+    public bool keyboard = false;
+
+    [Header("Movement related settings")]
+    [Range(1f, 20f)]
     public float moveSpeed = 10.0f;
-    // Use this for initialization
 
-    void Start()
+    private void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
         viewCamera = Camera.main;
-        //	Cursor.visible = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        //Vector3 mousePos = viewCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, viewCamera.transform.position.y));
-        //transform.LookAt(mousePos + Vector3.up * transform.position.y);
-        float inputHorizontal = Input.GetAxisRaw("P1_Horizontal");
-        float inputVertical = Input.GetAxisRaw("P1_Vertical");
-        Vector3 newVelocity = new Vector3(inputVertical * moveSpeed, 0.0f, inputHorizontal * -moveSpeed);
-        rigidBody.velocity = newVelocity;
+        _players.Add(this);
+    }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+    private void Update()
+    {
+        // Player rotation towards mouse
+
+        Vector3 cursorScreenPoint = Input.mousePosition;
+        Vector3 playerScreenPoint = viewCamera.WorldToScreenPoint(transform.position);
+
+        // Z axis removed as it's the distance to the camera
+        playerScreenPoint = new Vector3(playerScreenPoint.x, playerScreenPoint.y, 0f);
+
+        Vector3 aim = (cursorScreenPoint - playerScreenPoint).normalized;
+
+        // Screen XY is world XZ
+        aim = new Vector3(aim.x, 0f, aim.y);
+
+        transform.rotation = Quaternion.LookRotation(aim);
+
+        // Player movement
+
+        float inputHorizontal = 0f;
+        float inputVertical = 0f;
+
+        if (!keyboard)
         {
-            var proj = Instantiate(Bullet, gun.position, transform.rotation);
-            proj.AddForce(50,0,0);
-            
-            print("dfgh");
+            inputHorizontal = Input.GetAxis("P" + playerNumber + "_Horizontal");
+            inputVertical = Input.GetAxis("P" + playerNumber + "_Vertical");
+
+            inputHorizontal = Mathf.Abs(inputHorizontal) > deadzone ? inputHorizontal : 0f;
+            inputVertical = Mathf.Abs(inputVertical) > deadzone ? inputVertical : 0f;
         }
-            
+        else
+        {
+            inputHorizontal = Input.GetAxis("KB_Horizontal");
+            inputVertical = Input.GetAxis("KB_Vertical");
+        }
+        
+
+        rigidBody.velocity = new Vector3(inputVertical * moveSpeed, 0.0f, inputHorizontal * -moveSpeed);
+    }
+
+    private void OnDestroy()
+    {
+        _players.Remove(this);
     }
 }
