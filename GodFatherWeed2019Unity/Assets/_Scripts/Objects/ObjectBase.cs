@@ -13,7 +13,8 @@ public class ObjectBase : MonoBehaviour
     public float cooldownPickup;
     public float cooldownUtilisation;
 
-
+    [HideInInspector]
+    public PlayerController myPLayer;
     private float timerUtilisation;
     private Rigidbody rgb;
     private Vector3 initPos;
