@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     Rigidbody rigidBody;
     Camera viewCamera;
     Vector3 velocity;
+    public Transform gun;
+    public Rigidbody Bullet;
 
     public float moveSpeed = 10.0f;
     // Use this for initialization
@@ -27,5 +29,14 @@ public class PlayerController : MonoBehaviour
         float inputVertical = Input.GetAxisRaw("P1_Vertical");
         Vector3 newVelocity = new Vector3(inputVertical * moveSpeed, 0.0f, inputHorizontal * -moveSpeed);
         rigidBody.velocity = newVelocity;
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            var proj = Instantiate(Bullet, gun.position, transform.rotation);
+            proj.AddForce(50,0,0);
+            
+            print("dfgh");
+        }
+            
     }
 }
