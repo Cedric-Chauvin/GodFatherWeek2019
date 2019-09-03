@@ -6,23 +6,33 @@ public class PlayerController : MonoBehaviour
 {
     public static List<PlayerController> _players = new List<PlayerController>();
 
-    Rigidbody rigidBody;
-    Camera viewCamera;
+    private Rigidbody rigidBody;
+    private Camera viewCamera;
 
+    [field: Header("Number of the player, corresponds to the controller"), SerializeField]
+    public int playerNumber { get; private set; } = 1;
+
+    [Header("Input related settings")]
+    [Range(0.01f, 0.3f)]
+    public float deadzone = 0.1f;
+    public bool keyboard = false;
+
+    [Header("Movement related settings")]
+    [Range(1f, 20f)]
     public float moveSpeed = 10.0f;
 
     private void Awake()
-    {
-        PlayerController._players.Add(this);
-    }
-
-    void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
         viewCamera = Camera.main;
     }
 
-    void Update()
+    private void Start()
+    {
+        _players.Add(this);
+    }
+
+    private void Update()
     {
         // Player rotation towards mouse
 
@@ -40,9 +50,30 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(aim);
 
         // Player movement
-        float inputHorizontal = Input.GetAxisRaw("P1_Horizontal");
-        float inputVertical = Input.GetAxisRaw("P1_Vertical");
+
+        float inputHorizontal = 0f;
+        float inputVertical = 0f;
+
+        if (!keyboard)
+        {
+            inputHorizontal = Input.GetAxis("P" + playerNumber + "_Horizontal");
+            inputVertical = Input.GetAxis("P" + playerNumber + "_Vertical");
+
+            inputHorizontal = Mathf.Abs(inputHorizontal) > deadzone ? inputHorizontal : 0f;
+            inputVertical = Mathf.Abs(inputVertical) > deadzone ? inputVertical : 0f;
+        }
+        else
+        {
+            inputHorizontal = Input.GetAxis("KB_Horizontal");
+            inputVertical = Input.GetAxis("KB_Vertical");
+        }
+        
 
         rigidBody.velocity = new Vector3(inputVertical * moveSpeed, 0.0f, inputHorizontal * -moveSpeed);
+    }
+
+    private void OnDestroy()
+    {
+        _players.Remove(this);
     }
 }
