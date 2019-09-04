@@ -711,6 +711,7 @@ GameObject:
   - component: {fileID: 96950088}
   - component: {fileID: 96950087}
   - component: {fileID: 96950086}
+  - component: {fileID: 96950090}
   - component: {fileID: 96950091}
   m_Layer: 0
   m_Name: Object
@@ -792,6 +793,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &96950090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96950085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8776df39c94ab6542935af865b201660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUpText: {fileID: 0}
+  pickupText_Text: 
 --- !u!114 &96950091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1726,6 +1741,7 @@ MonoBehaviour:
   deadzone: 0.1
   moveSpeed: 500
   cooldown: 10
+  damageCooldown: 0.5
 --- !u!65 &310873773
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2254,6 +2270,7 @@ MonoBehaviour:
   deadzone: 0.1
   moveSpeed: 10
   cooldown: 10
+  damageCooldown: 0.5
 --- !u!54 &576789447
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4503,6 +4520,7 @@ MonoBehaviour:
   deadzone: 0.1
   moveSpeed: 500
   cooldown: 10
+  damageCooldown: 0.5
 --- !u!54 &1206858947
 Rigidbody:
   m_ObjectHideFlags: 0

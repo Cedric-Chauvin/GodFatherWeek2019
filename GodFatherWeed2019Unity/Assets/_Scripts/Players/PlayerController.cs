@@ -158,6 +158,7 @@ public class PlayerController : MonoBehaviour
         {
             lastDamageTime = Time.time;
             health -= dmg;
+            Debug.Log(health);
 
             animator.SetTrigger("Hit"); // Hit animation
 
@@ -169,8 +170,7 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        dead = true;
-
         animator.SetBool("Alive", false); // Death animation
+        dead = true;
     }
 }
