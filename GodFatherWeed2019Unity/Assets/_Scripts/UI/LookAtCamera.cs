@@ -6,6 +6,8 @@ public class LookAtCamera : MonoBehaviour
 {
     private void Update()
     {
-        // Rotate towards camera somehow
+        // Look towards camera script (Optional)
+        transform.LookAt(Camera.main.transform);
+        transform.forward = -transform.forward;
     }
 }
