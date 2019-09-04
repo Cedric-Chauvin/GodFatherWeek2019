@@ -12,48 +12,43 @@ public class MunCanne : MonoBehaviour
     private bool retour;
     private Transform target;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         lineRenderer.SetPosition(0, player.transform.position);
         Vector3 Pos = lineRenderer.GetPosition(1);
+
         if (retour)
         {
             dir = player.transform.position - Pos;
-            if(target!=null)
+            if (target != null)
                 target.position = Pos;
         }
+
         Pos += dir.normalized * speed * Time.deltaTime;
         lineRenderer.SetPosition(1, Pos);
+
         if (Pos.magnitude >= distanceMax)
             retour = true;
+
         foreach (var item in PlayerController._players)
         {
-            if(item!= player)
+            if (item != player)
             {
                 if ((Pos - item.transform.position).magnitude <= 0.5)
                 {
                     target = item.transform;
-                    //set degat
                     retour = true;
                 }
             }
         }
 
-        if ((Pos - player.transform.position).magnitude <= 1&& retour)
+        if ((Pos - player.transform.position).magnitude <= 1 && retour)
         {
             Destroy(gameObject);
-            //Destroy(item)
         }
     }
 
-    public void Setup(PlayerController PC, Vector3 direction,float distance,float degat,float _speed)
+    public void Setup(PlayerController PC, Vector3 direction, float distance, float degat, float _speed)
     {
         player = PC;
         dir = direction;

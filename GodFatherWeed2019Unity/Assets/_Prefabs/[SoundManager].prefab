@@ -47,9 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Music: {fileID: 5556313107614864315}
   SFX: {fileID: 5556313107614864312}
-  Clips:
-  - Name: Test
-    File: {fileID: 8300000, guid: 7a9b86a674bc53441bc4a173933c0fb9, type: 3}
+  Clips: []
   Items: []
   Deaths: []
   Wins: []

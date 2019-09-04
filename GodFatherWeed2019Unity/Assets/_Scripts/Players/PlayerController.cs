@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rigidBody;
     private Camera viewCamera;
-    public Animator animator;
+    private Animator animator;
 
     [field: Header("Number of the player, corresponds to the controller"), SerializeField]
     public int playerNumber { get; private set; } = 1;
@@ -21,10 +21,11 @@ public class PlayerController : MonoBehaviour
     [Range(500f, 1500f)]
     public float moveSpeed = 500f;
 
-    [Header("Item")]
+    [Header("Items")]
     private ObjectBase itemInRange;
     private ObjectBase currentItem;
 
+    [Header("Cooldowns")]
     [Range(1f, 20f)]
     public float pickupCooldown = 4f;
     private float lastPickupTime;
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
     [Range(0.5f, 2f)]
     public float beforeUseCooldown = 1f;
 
+    [field: Header("Health")]
     public float health { get; private set; } = 100f;
     private bool dead = false;
 
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody>();
         viewCamera = Camera.main;
+        animator = GetComponentInChildren<Animator>();
 
         lastPickupTime -= pickupCooldown;
         lastDamageTime -= damageCooldown;
@@ -69,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
     private void MovementAndOrientation()
     {
-        // Player movement
+        // Player movement and rotation
 
         float inputHorizontal;
         float inputVertical;
@@ -104,25 +107,25 @@ public class PlayerController : MonoBehaviour
             // Screen XY is world XZ
             aim = new Vector3(aim.x, 0f, aim.y);
 
-            // Player movement
-
-            inputHorizontal = Input.GetAxis("KB_Horizontal");
-            inputVertical = Input.GetAxis("KB_Vertical");
-
             // Applying rotation
             transform.rotation = Quaternion.LookRotation(aim);
+
+            // Player movement
+            inputHorizontal = Input.GetAxis("KB_Horizontal");
+            inputVertical = Input.GetAxis("KB_Vertical");
         }
 
         // Applying movement;
         rigidBody.velocity = new Vector3(inputHorizontal * moveSpeed * Time.deltaTime, rigidBody.velocity.y, inputVertical * moveSpeed * Time.deltaTime);
 
+        // Make current item follow player
         if (currentItem)
         {
             currentItem.transform.position = transform.position;
             currentItem.transform.rotation = transform.rotation;
         }
         
-        animator.SetFloat("Speed", rigidBody.velocity.sqrMagnitude);
+        animator.SetFloat("Speed", rigidBody.velocity.sqrMagnitude); // RUNNING ANIMATION
     }
 
     private void Interactions()
@@ -132,13 +135,15 @@ public class PlayerController : MonoBehaviour
             if (currentItem.Utilisation(transform.rotation.eulerAngles.y, this))
                 currentItem = null;
         }
-        else if (itemInRange && Time.time > lastPickupTime + pickupCooldown && Input.GetAxis("P" + playerNumber + "_Action_Axis") == 1f)
+        else if (itemInRange && Time.time > (lastPickupTime + pickupCooldown) && Input.GetAxis("P" + playerNumber + "_Action_Axis") == 1f)
         {
             lastPickupTime = Time.time;
             currentItem = itemInRange;
 
-            animator.SetBool("InRange", true);
-            animator.SetTrigger("UseRT");
+            animator.SetBool("InRange", true); // PICKUP ANIMATION
+            animator.SetTrigger("UseRT"); // PICKUP ANOIMATION
+
+            animator.SetBool("InRange", false); // RESET MULTI CONDITION
         }
     }
 
@@ -154,12 +159,12 @@ public class PlayerController : MonoBehaviour
 
     public void Damage(float dmg)
     {
-        if (health > 0f && Time.time > lastDamageTime + damageCooldown)
+        if (health > 0f && Time.time > (lastDamageTime + damageCooldown))
         {
             lastDamageTime = Time.time;
             health -= dmg;
 
-            animator.SetTrigger("Hit"); // Hit animation
+            animator.SetTrigger("Hit"); // HIT ANIMATION
 
             if (health <= 0f) Die();
         }
@@ -171,6 +176,6 @@ public class PlayerController : MonoBehaviour
     {
         dead = true;
 
-        animator.SetBool("Alive", false); // Death animation
+        animator.SetBool("Alive", false); // DEATH ANIMATION
     }
 }
