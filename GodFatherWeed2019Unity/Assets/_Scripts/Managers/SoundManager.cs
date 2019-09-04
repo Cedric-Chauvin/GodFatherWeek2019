@@ -14,12 +14,6 @@ public class SoundManager : MonoBehaviour
         public AudioClip File;
     }
 
-    [Serializable]
-    public class SoundEffectTyped : SoundEffect
-    {
-        public DefaultTypes Type = DefaultTypes.Any;
-    }
-
     public enum DefaultTypes
     {
         Any,
@@ -36,15 +30,15 @@ public class SoundManager : MonoBehaviour
 
     #region Public Variables
 
-    public float MaxSoundDistance { get; private set; }
-
     public AudioSource Music;
 
     public AudioSource SFX;
 
     public List<SoundEffect> Clips;
 
-    public List<SoundEffectTyped> DefaultClips;
+    public List<SoundEffect> Items;
+    public List<SoundEffect> Deaths;
+    public List<SoundEffect> Wins;
 
     public bool VolumeToggle
     {
@@ -73,9 +67,6 @@ public class SoundManager : MonoBehaviour
     #region Private Variables
 
     [SerializeField]
-    [Range(15f, 30f)]
-    private float _soundDistance;
-
     private bool _volumeToggle;
 
     #endregion
@@ -84,7 +75,6 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-
         // Prevent duplication of SoundManager
         if (Instance != null)
         {
@@ -95,8 +85,6 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(this);
 
         Instance = this;
-
-        MaxSoundDistance = Mathf.Pow(_soundDistance, 2);
 
         if (PlayerPrefs.HasKey("VolumeToggle"))
         {
@@ -136,17 +124,8 @@ public class SoundManager : MonoBehaviour
 
     private AudioClip GetSound(string soundName, DefaultTypes type = DefaultTypes.Any)
     {
-        List<SoundEffect> searchList;
-
-        switch (type)
-        {
-            case DefaultTypes.Any:
-                searchList = Clips;
-                break;
-            default:
-                searchList = Clips;
-                break;
-        }
+        List<SoundEffect> searchList = new List<SoundEffect>();
+        GetListByType(type, out searchList);
 
         foreach (SoundEffect sfx in searchList)
         {
@@ -156,27 +135,44 @@ public class SoundManager : MonoBehaviour
             }
         }
 
-        if (type != DefaultTypes.Any)
-        {
-            return GetDefaultSound(type);
-        }
-
         Debug.LogError("Sound not found - " + soundName);
         return null;
     }
 
-    private AudioClip GetDefaultSound(DefaultTypes type)
+    private AudioClip GetRandomSound(DefaultTypes type)
     {
-        foreach (SoundEffectTyped sfx in DefaultClips)
+        List<SoundEffect> searchList = new List<SoundEffect>();
+        GetListByType(type, out searchList);
+
+        if (searchList.Count > 0)
         {
-            if (sfx.Type == type)
-            {
-                return sfx.File;
-            }
+            System.Random rng = new System.Random();
+            int random = rng.Next(0, searchList.Count + 1);
+
+            return searchList[random].File;
         }
 
-        Debug.LogError("Default sound not found for type - " + type);
+        Debug.LogError("Random sound not found for type - " + type);
         return null;
+    }
+
+    private void GetListByType(DefaultTypes type, out List<SoundEffect> searchList)
+    {
+        switch (type)
+        {
+            case DefaultTypes.UseItem:
+                searchList = Items;
+                break;
+            case DefaultTypes.Death:
+                searchList = Deaths;
+                break;
+            case DefaultTypes.Win:
+                searchList = Wins;
+                break;
+            default:
+                searchList = Clips;
+                break;
+        }
     }
 
     #endregion

@@ -8,7 +8,7 @@ public class ObjectPickUp : MonoBehaviour
     public Text pickUpText;
     public string pickupText_Text;
 
-    private ObjectBase scriptObj;
+    public ObjectBase scriptObj;
 
     private void Start()
     {
@@ -71,11 +71,5 @@ public class ObjectPickUp : MonoBehaviour
                 }
             }
         }
-    }
-
-    public void RemoveItem()
-    {
-        pickUpText.gameObject.SetActive(false);
-        Destroy(gameObject);
     }
 }

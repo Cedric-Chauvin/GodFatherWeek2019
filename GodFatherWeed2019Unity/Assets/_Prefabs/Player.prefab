@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 2192092389903126724}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <playerNumber>k__BackingField: 1
-  keyboard: 1
+  keyboard: 0
   deadzone: 0.1
   moveSpeed: 500
   cooldown: 10
