@@ -12,6 +12,7 @@ public class AppareilPhoto : ObjectBase
     {
         foreach (var Player in PlayerController._players)
         {
+            if (myPLayer != Player)
             {
                 Vector3 direction = myPLayer.transform.InverseTransformPoint(Player.transform.position);
                 float angle = Mathf.Atan2(direction.x, direction.z);

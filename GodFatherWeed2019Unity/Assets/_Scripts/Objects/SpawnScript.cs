@@ -39,7 +39,7 @@ public class SpawnScript : MonoBehaviour
                     toto += rates[i];
                     i++;
                 }
-                item = Instantiate(transforms[i - 1]);
+                item = Instantiate(transforms[i-1], transform.position, transforms[i - 1].rotation);
             }
         }
     }
