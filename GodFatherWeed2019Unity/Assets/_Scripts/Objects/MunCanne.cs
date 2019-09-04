@@ -15,7 +15,7 @@ public class MunCanne : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
+        
     }
 
     // Update is called once per frame
@@ -60,6 +60,8 @@ public class MunCanne : MonoBehaviour
         distanceMax = distance;
         damage = degat;
         speed = _speed;
+        lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.SetPosition(1, player.transform.position);
+        lineRenderer.SetPosition(0, player.transform.position);
     }
 }
