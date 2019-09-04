@@ -57,8 +57,8 @@ public class ChestOpening : MonoBehaviour
         }
     }
 
-    // Method called after held for required time
-    private void ButtonHeld()
+	// Method called after held for required time
+	private void ButtonHeld()
     {
         Debug.Log("held for " + rng + " seconds");
         timerheld = startTime;

@@ -20,10 +20,24 @@ public class PlayerController : MonoBehaviour
     [Range(1f, 20f)]
     public float moveSpeed = 10.0f;
 
+    [Header("Item")]
+    private ObjectPickUp itemInRange;
+    private ObjectPickUp currentItem;
+    [Range(1f, 20f)]
+    public float cooldown = 10f;
+    private float lastPickupTime;
+
+    private void OnDestroy()
+    {
+        _players.Remove(this);
+    }
+
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
         viewCamera = Camera.main;
+
+        lastPickupTime -= cooldown;
     }
 
     private void Start()
@@ -32,6 +46,13 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update()
+    {
+        MovementAndOrientation();
+
+        Interactions();
+    }
+
+    private void MovementAndOrientation()
     {
         // Player movement
 
@@ -81,8 +102,23 @@ public class PlayerController : MonoBehaviour
         rigidBody.velocity = new Vector3(inputVertical * moveSpeed, 0.0f, inputHorizontal * -moveSpeed);
     }
 
-    private void OnDestroy()
+    private void Interactions()
     {
-        _players.Remove(this);
+        if (itemInRange && Time.time > (lastPickupTime + cooldown) && Input.GetAxis("P" + playerNumber + "_Action") == 1f)
+        {
+            lastPickupTime = Time.time;
+            currentItem = itemInRange;
+            itemInRange.RemoveItem();
+        }
+    }
+
+    public ObjectPickUp GetItemInRange()
+    {
+        return itemInRange;
+    }
+
+    public void SetItemInRange(ObjectPickUp obj)
+    {
+        itemInRange = obj;
     }
 }
