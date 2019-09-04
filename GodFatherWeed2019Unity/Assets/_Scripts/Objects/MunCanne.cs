@@ -40,7 +40,7 @@ public class MunCanne : MonoBehaviour
                 if ((Pos - item.transform.position).magnitude <= 0.5)
                 {
                     target = item.transform;
-                    //set degat
+                    item.Damage(damage);
                     retour = true;
                 }
             }
@@ -49,7 +49,6 @@ public class MunCanne : MonoBehaviour
         if ((Pos - player.transform.position).magnitude <= 1&& retour)
         {
             Destroy(gameObject);
-            //Destroy(item)
         }
     }
 
