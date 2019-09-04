@@ -118,6 +118,16 @@ public class SoundManager : MonoBehaviour
         VolumeToggle = !VolumeToggle;
     }
 
+    public void ChangeVolumeMusic(float vol)
+    {
+        Music.volume = vol;
+    }
+
+    public void ChangeVolumeSFX(float vol)
+    {
+        SFX.volume = vol;
+    }
+
     #endregion
 
     #region Private Methods

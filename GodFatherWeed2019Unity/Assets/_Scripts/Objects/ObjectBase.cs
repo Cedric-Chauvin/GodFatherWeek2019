@@ -6,7 +6,7 @@ public class ObjectBase : MonoBehaviour
 {
 
     public float speed;
-    public float distanceMax;
+    public float damage;
     public float poids;
     public float dommage;
     public int nbUtilisation;
@@ -30,13 +30,13 @@ public class ObjectBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((transform.position - initPos).magnitude >= distanceMax && isLaunch)
+        if ((transform.position - initPos).magnitude >= damage && isLaunch)
             Destroy(gameObject);
         if (timerUtilisation > 0)
             timerUtilisation -= Time.deltaTime;
     }
 
-    public bool Utilisation(float dir,PlayerController playerController)
+    public bool Utilisation(float dir, PlayerController playerController)
     {
         myPLayer = playerController;
         bool retour = false;

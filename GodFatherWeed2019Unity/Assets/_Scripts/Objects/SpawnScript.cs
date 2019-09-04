@@ -13,9 +13,7 @@ public class SpawnScript : MonoBehaviour
     private float totalRates;
     private Transform item;
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         timer = Random.Range(tempsSpawn.x, tempsSpawn.y);
         foreach (var item in rates)
@@ -24,8 +22,7 @@ public class SpawnScript : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (item == null)
         {
@@ -42,7 +39,7 @@ public class SpawnScript : MonoBehaviour
                     toto += rates[i];
                     i++;
                 }
-                item = Instantiate(transforms[i-1],transform.position, transforms[i - 1].rotation);
+                item = Instantiate(transforms[i-1], transform.position, transforms[i - 1].rotation);
             }
         }
     }

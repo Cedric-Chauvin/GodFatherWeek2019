@@ -12,16 +12,17 @@ public class AppareilPhoto : ObjectBase
     {
         foreach (var Player in PlayerController._players)
         {
-            if(myPLayer != Player)
+            if (myPLayer != Player)
             {
                 Vector3 direction = myPLayer.transform.InverseTransformPoint(Player.transform.position);
                 float angle = Mathf.Atan2(direction.x, direction.z);
-                if (Mathf.Abs(angle) > flashAngle && direction.magnitude<flashRange)
+
+                if (Mathf.Abs(angle) > flashAngle && direction.magnitude < flashRange)
                 {
-                    Debug.Log("flash");
+                    Debug.Log("Object TODO: Flash!");
                 }
             }
-        }  
+        }
     }
 
 }
