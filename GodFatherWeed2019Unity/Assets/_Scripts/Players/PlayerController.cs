@@ -100,13 +100,20 @@ public class PlayerController : MonoBehaviour
 
         // Applying movement;
         rigidBody.velocity = new Vector3(inputHorizontal * moveSpeed * Time.deltaTime, rigidBody.velocity.y, inputVertical * moveSpeed * Time.deltaTime);
+
+        if (currentItem)
+        {
+            currentItem.transform.position = transform.position;
+            currentItem.transform.rotation = transform.rotation;
+        }
     }
 
     private void Interactions()
     {
-        if (currentItem&& Input.GetButtonDown("P" + playerNumber + "_Action"))
+        if (currentItem && Input.GetButtonDown("P" + playerNumber + "_Action"))
         {
-            currentItem.Utilisation(transform.rotation.eulerAngles.y,this); 
+            if (currentItem.Utilisation(transform.rotation.eulerAngles.y, this))
+                currentItem = null;
         }
         if (itemInRange && Time.time > (lastPickupTime + cooldown) && Input.GetAxis("P" + playerNumber + "_Action") == 1f)
         {

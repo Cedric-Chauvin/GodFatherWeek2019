@@ -49,7 +49,7 @@ public class MunCanne : MonoBehaviour
         if ((Pos - player.transform.position).magnitude <= 1&& retour)
         {
             Destroy(gameObject);
-            //player item
+            //Destroy(item)
         }
     }
 
