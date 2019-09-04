@@ -115,7 +115,8 @@ public class PlayerController : MonoBehaviour
             if (currentItem.Utilisation(transform.rotation.eulerAngles.y, this))
                 currentItem = null;
         }
-        if (itemInRange && Time.time > (lastPickupTime + cooldown) && Input.GetAxis("P" + playerNumber + "_Action") == 1f)
+
+        if (itemInRange && Time.time > (lastPickupTime + cooldown) && Input.GetAxis("P" + playerNumber + "_Action_Axis") == 1f)
         {
             lastPickupTime = Time.time;
             currentItem = itemInRange;
