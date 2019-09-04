@@ -5,26 +5,29 @@ using UnityEngine.UI;
 
 public class ChestOpening : MonoBehaviour
 {
+    public static ChestOpening Instance;
+
     public Text Text;
     private bool inRange;
     private float startTime = 0f;
     private float timerheld = 0f;
     private int rng;
-    [SerializeField] public string key;
+    public string key;
+    public GameObject victoryui;
+    public GameObject gameui;
     private bool held = false;
+    public Animator animator;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        GenRng();
+        Instance = this;
     }
-
-    // Update is called once per frame
-    void Update()
+    void OnTriggerExit()
     {
-        
+        held = false;
+        timerheld = 0;
+        startTime = 0;
     }
-
     private void OnTriggerStay(Collider other)
     {
         if (Input.GetKeyDown(key) && other.gameObject.tag.Equals("Player"))
@@ -62,7 +65,18 @@ public class ChestOpening : MonoBehaviour
     {
         Debug.Log("held for " + rng + " seconds");
         timerheld = startTime;
-        GenRng();
+        Victory();
+        
+        //GenRng();
+    }
+
+    public void Victory()
+    {
+        animator.SetBool("Win", true);
+        Debug.Log("victory");
+        gameui.SetActive(false);
+        victoryui.SetActive(true);
+        //Time.timeScale = 0f;
     }
 
     public void GenRng()

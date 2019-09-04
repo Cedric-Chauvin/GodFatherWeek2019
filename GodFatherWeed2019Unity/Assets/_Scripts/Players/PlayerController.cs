@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rigidBody;
     private Camera viewCamera;
+    public Animator animator;
 
     [field: Header("Number of the player, corresponds to the controller"), SerializeField]
     public int playerNumber { get; private set; } = 1;
@@ -106,6 +107,8 @@ public class PlayerController : MonoBehaviour
             currentItem.transform.position = transform.position;
             currentItem.transform.rotation = transform.rotation;
         }
+        
+        animator.SetFloat("Speed", rigidBody.velocity.sqrMagnitude);
     }
 
     private void Interactions()
@@ -119,6 +122,8 @@ public class PlayerController : MonoBehaviour
         {
             lastPickupTime = Time.time;
             currentItem = itemInRange;
+            animator.SetBool("InRange", true);
+            animator.SetTrigger("UseRT");
         }
     }
 
