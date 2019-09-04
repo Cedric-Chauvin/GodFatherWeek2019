@@ -49,7 +49,7 @@ public class ObjectBase : MonoBehaviour
         }
     }
 
-    public void Lancer(float dir)
+    public virtual void Lancer(float dir)
     {
         transform.rotation = Quaternion.Euler(0, dir, 0);
         rgb.velocity = transform.InverseTransformDirection(0,0,speed);
