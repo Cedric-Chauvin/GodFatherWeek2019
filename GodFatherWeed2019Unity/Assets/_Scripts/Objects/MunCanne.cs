@@ -31,7 +31,7 @@ public class MunCanne : MonoBehaviour
         }
         Pos += dir.normalized * speed * Time.deltaTime;
         lineRenderer.SetPosition(1, Pos);
-        if (Pos.magnitude >= distanceMax)
+        if ((Pos- player.transform.position).magnitude >= distanceMax)
             retour = true;
         foreach (var item in PlayerController._players)
         {
