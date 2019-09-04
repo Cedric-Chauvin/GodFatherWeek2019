@@ -21,7 +21,7 @@ public class ObjectBase : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rgb = GetComponent<Rigidbody>();
     }
@@ -44,7 +44,7 @@ public class ObjectBase : MonoBehaviour
                 Lancer(dir);
             else
             {
-                Capacité();
+                Capacité(dir);
             }
         }
     }
@@ -56,7 +56,7 @@ public class ObjectBase : MonoBehaviour
         initPos = transform.position;
     }
 
-    public virtual void Capacité()
+    public virtual void Capacité(float dir)
     {
         nbUtilisation--;
     }

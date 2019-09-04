@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestObject : MonoBehaviour
 {
 
-     public MunCanne @object;
+     public CarteBancaire @object;
     public PlayerController Pc;
 
     // Start is called before the first frame update
@@ -19,7 +19,7 @@ public class TestObject : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            @object.Setup(Pc, new Vector3(0, 0, 1));
+            @object.Utilisation(0) ;
         }
     }
 }
