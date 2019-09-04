@@ -8,7 +8,7 @@ public class ObjectPickUp : MonoBehaviour
     public Text pickUpText;
     public string pickupText_Text;
 
-    public ObjectBase scriptObj;
+    private ObjectBase scriptObj;
 
     private void Start()
     {
