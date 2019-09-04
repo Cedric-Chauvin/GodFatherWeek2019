@@ -42,21 +42,30 @@ public class ObjectPickUp : MonoBehaviour
         if (collision.gameObject.tag.Equals("Player"))
         {
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+            ObjectPickUp inRangePlayer = player.GetItemInRange();
 
-            if (player.GetItemInRange() == this)
+            if (inRangePlayer == this)
                 pickUpText.gameObject.SetActive(true);
             else
             {
-                ObjectPickUp other = player.GetItemInRange();
-                if (Mathf.Abs(Vector3.SqrMagnitude(player.transform.position - other.transform.position)) > Mathf.Abs(Vector3.SqrMagnitude(player.transform.position - transform.position)))
+                if (inRangePlayer != null)
                 {
-                    player.SetItemInRange(this);
-                    pickUpText.gameObject.SetActive(true);
+                    if (Mathf.Abs(Vector3.SqrMagnitude(player.transform.position - inRangePlayer.transform.position)) > Mathf.Abs(Vector3.SqrMagnitude(player.transform.position - transform.position)))
+                    {
+                        player.SetItemInRange(this);
+                        pickUpText.gameObject.SetActive(true);
 
-                    other.pickUpText.gameObject.SetActive(false);
+                        inRangePlayer.pickUpText.gameObject.SetActive(false);
+                    }
+                    else
+                        pickUpText.gameObject.SetActive(false);
                 }
                 else
-                    pickUpText.gameObject.SetActive(false);
+                {
+                    collision.gameObject.GetComponent<PlayerController>().SetItemInRange(this);
+
+                    pickUpText.gameObject.SetActive(true);
+                }
             }
         }
     }
