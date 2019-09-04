@@ -17,8 +17,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement related settings")]
     public float deadzone = 0.1f;
-    [Range(1f, 20f)]
-    public float moveSpeed = 10.0f;
+    [Range(500f, 1500f)]
+    public float moveSpeed = 500f;
 
     [Header("Item")]
     private ObjectPickUp itemInRange;
@@ -98,8 +98,8 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(aim);
         }
 
-        // Applying movement
-        rigidBody.velocity = new Vector3(inputVertical * moveSpeed, 0.0f, inputHorizontal * -moveSpeed);
+        // Applying movement;
+        rigidBody.velocity = new Vector3(inputHorizontal * moveSpeed * Time.deltaTime, rigidBody.velocity.y, inputVertical * moveSpeed * Time.deltaTime);
     }
 
     private void Interactions()
