@@ -18,12 +18,8 @@ public class ChestOpening : MonoBehaviour
     [Range(1, 10)]
     public int maxTime = 8;
 
-    public string key;
-
     public GameObject victoryui;
     public GameObject gameui;
-
-    public Text Text;
 
     public Animator animator;
 
@@ -33,6 +29,7 @@ public class ChestOpening : MonoBehaviour
 
         System.Random random = new System.Random();
         rng = random.Next(minTime, maxTime);
+        Debug.Log(rng);
     }
     private void OnTriggerExit()
     {
@@ -44,20 +41,19 @@ public class ChestOpening : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         animator = other.gameObject.GetComponentInChildren<Animator>();
+        int playerNumber = other.gameObject.GetComponent<PlayerController>().playerNumber;
 
-        if (Input.GetKeyDown(key) && other.gameObject.tag.Equals("Player"))
+        if (Input.GetAxis("P" + playerNumber + "_Action_Axis") == -1f && other.gameObject.tag.Equals("Player"))
         {
             startTime = Time.time;
             timerheld = Time.time;
         }
 
         // Adds time onto the timer so long as the key is pressed
-        if (Input.GetKey(key) && held == false)
+        if (Input.GetAxis("P" + playerNumber + "_Action_Axis") == -1f && held == false)
         {
             timerheld += Time.deltaTime;
-
-            Text.gameObject.SetActive(true);
-            Text.text = (timerheld - startTime).ToString();
+            Debug.Log(timerheld);
 
             // Once the timer float has added on the required holdTime, changes the bool (for a single trigger), and calls the function
             if (timerheld > (startTime + rng))
