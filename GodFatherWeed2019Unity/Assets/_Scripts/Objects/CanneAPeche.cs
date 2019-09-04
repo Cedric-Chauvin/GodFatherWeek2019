@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CanneAPeche : MonoBehaviour
+public class CanneAPeche : ObjectBase
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public Transform ligne;
+
+    public override void Lancer(float dir)
     {
-        
+        Instantiate(ligne);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

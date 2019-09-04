@@ -22,7 +22,12 @@ public class ChestOpening : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(key))
+        
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (Input.GetKeyDown(key) && other.gameObject.tag.Equals("Player"))
         {
             startTime = Time.time;
             timerheld = startTime;
@@ -47,6 +52,8 @@ public class ChestOpening : MonoBehaviour
         if (Input.GetKeyUp(key))
         {
             held = false;
+            timerheld = 0;
+            startTime = 0;
         }
     }
 
