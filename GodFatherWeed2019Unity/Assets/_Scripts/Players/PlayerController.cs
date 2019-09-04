@@ -123,13 +123,12 @@ public class PlayerController : MonoBehaviour
 
     private void Interactions()
     {
-        if (currentItem && Input.GetButtonDown("P" + playerNumber + "_Action"))
+        if (currentItem && Input.GetButtonDown("P" + playerNumber + "_Action_Axis"))
         {
             if (currentItem.Utilisation(transform.rotation.eulerAngles.y, this))
                 currentItem = null;
         }
-
-        if (itemInRange && Time.time > (lastPickupTime + cooldown) && Input.GetAxis("P" + playerNumber + "_Action_Axis") == 1f)
+        else if (itemInRange && Time.time > (lastPickupTime + cooldown) && Input.GetAxis("P" + playerNumber + "_Action_Axis") == 1f)
         {
             lastPickupTime = Time.time;
             currentItem = itemInRange;
