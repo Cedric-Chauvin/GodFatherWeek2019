@@ -30,6 +30,7 @@ public class ChestOpening : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
+        animator = other.gameObject.GetComponentInChildren<Animator>();
         if (Input.GetKeyDown(key) && other.gameObject.tag.Equals("Player"))
         {
             startTime = Time.time;

@@ -910,6 +910,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: -7943378556525867576, guid: 1251e3234758dc448aa4af4ee831fd8c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -572505605446537570, guid: 1251e3234758dc448aa4af4ee831fd8c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: -9217817218132447574, guid: 1251e3234758dc448aa4af4ee831fd8c,
         type: 3}
       propertyPath: m_Layer
@@ -921,11 +931,6 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -8542655298583481684, guid: 1251e3234758dc448aa4af4ee831fd8c,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: -7943378556525867576, guid: 1251e3234758dc448aa4af4ee831fd8c,
         type: 3}
       propertyPath: m_Layer
       value: 8
@@ -1051,11 +1056,6 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -819139046232449951, guid: 1251e3234758dc448aa4af4ee831fd8c,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: -572505605446537570, guid: 1251e3234758dc448aa4af4ee831fd8c,
         type: 3}
       propertyPath: m_Layer
       value: 8
@@ -1722,7 +1722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 129034236}
   <playerNumber>k__BackingField: 1
-  keyboard: 0
+  keyboard: 1
   deadzone: 0.1
   moveSpeed: 500
   cooldown: 10
@@ -4484,7 +4484,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1206858946
 MonoBehaviour:
   m_ObjectHideFlags: 0
