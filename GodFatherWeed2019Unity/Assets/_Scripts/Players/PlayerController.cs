@@ -24,13 +24,17 @@ public class PlayerController : MonoBehaviour
     [Header("Item")]
     private ObjectBase itemInRange;
     private ObjectBase currentItem;
+
     [Range(1f, 20f)]
-    public float cooldown = 10f;
+    public float pickupCooldown = 4f;
     private float lastPickupTime;
 
     [Range(0.1f, 2f)]
     public float damageCooldown = 0.5f;
     private float lastDamageTime;
+
+    [Range(0.5f, 2f)]
+    public float beforeUseCooldown = 1f;
 
     public float health { get; private set; } = 100f;
     private bool dead = false;
@@ -45,7 +49,7 @@ public class PlayerController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         viewCamera = Camera.main;
 
-        lastPickupTime -= cooldown;
+        lastPickupTime -= pickupCooldown;
         lastDamageTime -= damageCooldown;
     }
 
@@ -123,14 +127,13 @@ public class PlayerController : MonoBehaviour
 
     private void Interactions()
     {
-        if (currentItem && Input.GetAxis("P" + playerNumber + "_Action_Axis") == 1)
+        if (currentItem && Input.GetAxis("P" + playerNumber + "_Action_Axis") == 1f && Time.time > (lastPickupTime + beforeUseCooldown))
         {
             if (currentItem.Utilisation(transform.rotation.eulerAngles.y, this))
                 currentItem = null;
         }
-        else if (itemInRange && Time.time > (lastPickupTime + cooldown) && Input.GetAxis("P" + playerNumber + "_Action_Axis") == 1f)
+        else if (itemInRange && Time.time > lastPickupTime + pickupCooldown && Input.GetAxis("P" + playerNumber + "_Action_Axis") == 1f)
         {
-            lastDamageTime = Time.time;
             lastPickupTime = Time.time;
             currentItem = itemInRange;
 
@@ -151,8 +154,9 @@ public class PlayerController : MonoBehaviour
 
     public void Damage(float dmg)
     {
-        if (health > 0f && lastDamageTime < Time.time + damageCooldown)
+        if (health > 0f && Time.time > lastDamageTime + damageCooldown)
         {
+            lastDamageTime = Time.time;
             health -= dmg;
 
             animator.SetTrigger("Hit"); // Hit animation
