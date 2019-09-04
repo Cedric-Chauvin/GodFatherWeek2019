@@ -167,7 +167,5 @@ public class PlayerController : MonoBehaviour
         dead = true;
 
         // Call death animation here and ragdoll at the end of it via animation event (TODO)
-
-        // Make opposite player win
     }
 }
