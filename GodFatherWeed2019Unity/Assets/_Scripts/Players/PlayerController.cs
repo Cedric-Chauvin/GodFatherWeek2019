@@ -123,15 +123,17 @@ public class PlayerController : MonoBehaviour
 
     private void Interactions()
     {
-        if (currentItem && Input.GetButtonDown("P" + playerNumber + "_Action_Axis"))
+        if (currentItem && Input.GetAxis("P" + playerNumber + "_Action_Axis") == 1)
         {
             if (currentItem.Utilisation(transform.rotation.eulerAngles.y, this))
                 currentItem = null;
         }
         else if (itemInRange && Time.time > (lastPickupTime + cooldown) && Input.GetAxis("P" + playerNumber + "_Action_Axis") == 1f)
         {
+            lastDamageTime = Time.time;
             lastPickupTime = Time.time;
             currentItem = itemInRange;
+
             animator.SetBool("InRange", true);
             animator.SetTrigger("UseRT");
         }
@@ -153,7 +155,7 @@ public class PlayerController : MonoBehaviour
         {
             health -= dmg;
 
-            // Call damage animation here (TODO)
+            animator.SetTrigger("Hit"); // Hit animation
 
             if (health <= 0f) Die();
         }
@@ -165,6 +167,6 @@ public class PlayerController : MonoBehaviour
     {
         dead = true;
 
-        // Call death animation here and ragdoll at the end of it via animation event (TODO)
+        animator.SetBool("Alive", false); // Death animation
     }
 }
