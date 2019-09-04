@@ -8,17 +8,20 @@ public class ObjectPickUp : MonoBehaviour
     public Text pickUpText;
     public string pickupText_Text;
 
+    private ObjectBase scriptObj;
+
     private void Start()
     {
         pickUpText.gameObject.SetActive(false);
         pickUpText.text = pickupText_Text;
+        scriptObj = GetComponent<ObjectBase>();
     }
 
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
-            collision.gameObject.GetComponent<PlayerController>().SetItemInRange(this);
+            collision.gameObject.GetComponent<PlayerController>().SetItemInRange(scriptObj);
 
             pickUpText.gameObject.SetActive(true);
         }
@@ -42,9 +45,9 @@ public class ObjectPickUp : MonoBehaviour
         if (collision.gameObject.tag.Equals("Player"))
         {
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-            ObjectPickUp inRangePlayer = player.GetItemInRange();
+            ObjectBase inRangePlayer = player.GetItemInRange();
 
-            if (inRangePlayer == this)
+            if (inRangePlayer == scriptObj)
                 pickUpText.gameObject.SetActive(true);
             else
             {
@@ -52,17 +55,17 @@ public class ObjectPickUp : MonoBehaviour
                 {
                     if (Mathf.Abs(Vector3.SqrMagnitude(player.transform.position - inRangePlayer.transform.position)) > Mathf.Abs(Vector3.SqrMagnitude(player.transform.position - transform.position)))
                     {
-                        player.SetItemInRange(this);
+                        player.SetItemInRange(scriptObj);
                         pickUpText.gameObject.SetActive(true);
 
-                        inRangePlayer.pickUpText.gameObject.SetActive(false);
+                        inRangePlayer.GetComponent<ObjectPickUp>().pickUpText.gameObject.SetActive(false);
                     }
                     else
                         pickUpText.gameObject.SetActive(false);
                 }
                 else
                 {
-                    collision.gameObject.GetComponent<PlayerController>().SetItemInRange(this);
+                    collision.gameObject.GetComponent<PlayerController>().SetItemInRange(scriptObj);
 
                     pickUpText.gameObject.SetActive(true);
                 }

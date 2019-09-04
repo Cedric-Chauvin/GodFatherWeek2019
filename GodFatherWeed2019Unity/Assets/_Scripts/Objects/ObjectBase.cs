@@ -35,8 +35,9 @@ public class ObjectBase : MonoBehaviour
             timerUtilisation -= Time.deltaTime;
     }
 
-    public void Utilisation(float dir)
+    public void Utilisation(float dir,PlayerController playerController)
     {
+        myPLayer = playerController;
         if (timerUtilisation <= 0)
         {
             timerUtilisation = cooldownUtilisation;

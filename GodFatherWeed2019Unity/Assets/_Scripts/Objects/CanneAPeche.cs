@@ -9,7 +9,7 @@ public class CanneAPeche : ObjectBase
 
     public override void Lancer(float dir)
     {
-        Instantiate(ligne);
+        Transform instance = Instantiate(ligne);
+        instance.GetComponent<MunCanne>().Setup(myPLayer, new Vector3(Mathf.Tan(dir), 0, 1), distanceMax, dommage);
     }
-
 }
