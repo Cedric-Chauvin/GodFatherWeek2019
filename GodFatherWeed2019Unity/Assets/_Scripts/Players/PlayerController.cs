@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     public float damageCooldown = 0.5f;
     private float lastDamageTime;
 
-    private float health = 1000f;
+    public float health { get; private set; } = 100f;
     private bool dead = false;
 
     private void OnDestroy()
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
 
     public void Damage(float dmg)
     {
-        if (health > 0f && lastDamageTime > Time.time + damageCooldown)
+        if (health > 0f && lastDamageTime < Time.time + damageCooldown)
         {
             health -= dmg;
 

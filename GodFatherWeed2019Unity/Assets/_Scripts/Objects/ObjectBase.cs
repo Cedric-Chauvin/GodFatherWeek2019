@@ -69,4 +69,14 @@ public class ObjectBase : MonoBehaviour
     {
         nbUtilisation--;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (isLaunch && other.tag == "Player" && myPLayer.transform != other.transform)
+        {
+            other.GetComponent<PlayerController>().Damage(dommage);
+            Destroy(gameObject);
+        }
+
+    }
 }
