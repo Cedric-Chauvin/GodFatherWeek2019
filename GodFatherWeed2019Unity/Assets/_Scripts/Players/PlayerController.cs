@@ -28,6 +28,13 @@ public class PlayerController : MonoBehaviour
     public float cooldown = 10f;
     private float lastPickupTime;
 
+    [Range(0.1f, 2f)]
+    public float damageCooldown = 0.5f;
+    private float lastDamageTime;
+
+    private float health = 1000f;
+    private bool dead = false;
+
     private void OnDestroy()
     {
         _players.Remove(this);
@@ -39,6 +46,7 @@ public class PlayerController : MonoBehaviour
         viewCamera = Camera.main;
 
         lastPickupTime -= cooldown;
+        lastDamageTime -= damageCooldown;
     }
 
     private void Start()
@@ -48,6 +56,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (dead) return;
+
         MovementAndOrientation();
 
         Interactions();
@@ -118,7 +128,8 @@ public class PlayerController : MonoBehaviour
             if (currentItem.Utilisation(transform.rotation.eulerAngles.y, this))
                 currentItem = null;
         }
-        if (itemInRange && Time.time > (lastPickupTime + cooldown) && Input.GetAxis("P" + playerNumber + "_Action") == 1f)
+
+        if (itemInRange && Time.time > (lastPickupTime + cooldown) && Input.GetAxis("P" + playerNumber + "_Action_Axis") == 1f)
         {
             lastPickupTime = Time.time;
             currentItem = itemInRange;
@@ -135,5 +146,26 @@ public class PlayerController : MonoBehaviour
     public void SetItemInRange(ObjectBase obj)
     {
         itemInRange = obj;
+    }
+
+    public void Damage(float dmg)
+    {
+        if (health > 0f && lastDamageTime > Time.time + damageCooldown)
+        {
+            health -= dmg;
+
+            // Call damage animation here (TODO)
+
+            if (health <= 0f) Die();
+        }
+        else
+            Debug.Log("Dead already!");
+    }
+
+    public void Die()
+    {
+        dead = true;
+
+        // Call death animation here and ragdoll at the end of it via animation event (TODO)
     }
 }
