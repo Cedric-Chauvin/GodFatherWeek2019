@@ -19,7 +19,7 @@ public class TestObject : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            @object.Utilisation(0) ;
+           // @object.Utilisation(0) ;
         }
     }
 }

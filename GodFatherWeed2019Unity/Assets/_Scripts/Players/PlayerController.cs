@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 500f;
 
     [Header("Item")]
-    private ObjectPickUp itemInRange;
-    private ObjectPickUp currentItem;
+    private ObjectBase itemInRange;
+    private ObjectBase currentItem;
     [Range(1f, 20f)]
     public float cooldown = 10f;
     private float lastPickupTime;
@@ -104,20 +104,23 @@ public class PlayerController : MonoBehaviour
 
     private void Interactions()
     {
+        if (currentItem&& Input.GetButtonDown("P" + playerNumber + "_Action"))
+        {
+            currentItem.Utilisation(transform.rotation.eulerAngles.y,this); 
+        }
         if (itemInRange && Time.time > (lastPickupTime + cooldown) && Input.GetAxis("P" + playerNumber + "_Action") == 1f)
         {
             lastPickupTime = Time.time;
             currentItem = itemInRange;
-            itemInRange.RemoveItem();
         }
     }
 
-    public ObjectPickUp GetItemInRange()
+    public ObjectBase GetItemInRange()
     {
         return itemInRange;
     }
 
-    public void SetItemInRange(ObjectPickUp obj)
+    public void SetItemInRange(ObjectBase obj)
     {
         itemInRange = obj;
     }

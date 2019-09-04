@@ -2,8 +2,9 @@
 
 public class MunCanne : MonoBehaviour
 {
-    public float speed;
-    public float distanceMax;
+    private float speed;
+    private float distanceMax;
+    private float damage;
 
     private LineRenderer lineRenderer;
     private PlayerController player;
@@ -14,7 +15,7 @@ public class MunCanne : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
+        
     }
 
     // Update is called once per frame
@@ -39,6 +40,7 @@ public class MunCanne : MonoBehaviour
                 if ((Pos - item.transform.position).magnitude <= 0.5)
                 {
                     target = item.transform;
+                    //set degat
                     retour = true;
                 }
             }
@@ -51,10 +53,15 @@ public class MunCanne : MonoBehaviour
         }
     }
 
-    public void Setup(PlayerController PC, Vector3 direction)
+    public void Setup(PlayerController PC, Vector3 direction,float distance,float degat,float _speed)
     {
         player = PC;
         dir = direction;
+        distanceMax = distance;
+        damage = degat;
+        speed = _speed;
+        lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.SetPosition(1, player.transform.position);
+        lineRenderer.SetPosition(0, player.transform.position);
     }
 }
