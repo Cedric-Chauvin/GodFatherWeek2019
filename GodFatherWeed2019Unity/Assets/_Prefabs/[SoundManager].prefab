@@ -48,10 +48,39 @@ MonoBehaviour:
   Music: {fileID: 5556313107614864315}
   SFX: {fileID: 5556313107614864312}
   Clips: []
-  Items: []
-  Deaths: []
-  Wins: []
-  _volumeToggle: 0
+  Items:
+  - Name: Flash
+    File: {fileID: 8300000, guid: 6d361372104120944a22b6734440ce59, type: 3}
+  - Name: Pickup
+    File: {fileID: 8300000, guid: b4b561fff933706409691e38e8f430b3, type: 3}
+  - Name: Throw
+    File: {fileID: 8300000, guid: 498e576d43582b74c8ef2179577fd8be, type: 3}
+  - Name: Cooldown
+    File: {fileID: 8300000, guid: a7c6a04b8b0022446a4f2572925e24fc, type: 3}
+  - Name: Chest_open
+    File: {fileID: 8300000, guid: 1737055678136284d8eb3ce29734b7e5, type: 3}
+  - Name: Chest_unlock
+    File: {fileID: 8300000, guid: 2f04b7dc8a6a8e2439e0bd23afd4fb68, type: 3}
+  - Name: Chest_lock
+    File: {fileID: 8300000, guid: 0ecdd998c5cfc2245b726f2e30aae5f9, type: 3}
+  Deaths:
+  - Name: Death_male
+    File: {fileID: 8300000, guid: 6e2a72e994a1e7340b09995600332d6b, type: 3}
+  - Name: Death_female
+    File: {fileID: 8300000, guid: 0bf101f6874eba4418f6ec0aec939fd8, type: 3}
+  Wins:
+  - Name: Victory
+    File: {fileID: 8300000, guid: 34f20b50e9c064a43b763524b3985cbc, type: 3}
+  - Name: Victory
+    File: {fileID: 8300000, guid: a4edd713894e6d540b28e484d5bad8d2, type: 3}
+  - Name: Victory
+    File: {fileID: 8300000, guid: 892bf24f202fc2641bd7a75af7365aaf, type: 3}
+  Damage:
+  - Name: Hurt_male
+    File: {fileID: 8300000, guid: bc69a9e691e64ec46bf9b8008c4462de, type: 3}
+  - Name: Hurt_female
+    File: {fileID: 8300000, guid: f60723167f064dd46ab3bf744ea86b64, type: 3}
+  _volumeToggle: 1
 --- !u!82 &5556313107614864315
 AudioSource:
   m_ObjectHideFlags: 0
@@ -62,7 +91,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 0c7f4ac3264341a4a80e9f4538f075df, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

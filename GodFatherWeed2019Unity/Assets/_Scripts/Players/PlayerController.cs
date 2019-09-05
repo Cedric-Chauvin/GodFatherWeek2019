@@ -151,6 +151,7 @@ public class PlayerController : MonoBehaviour
             // Remove pickup script from current item
             Destroy(currentItem.gameObject.GetComponent<ObjectPickUp>());
 
+            SoundManager.Instance.PlaySFX("Pickup", SoundManager.DefaultTypes.UseItem);
             animator.SetBool("InRange", true); // PICKUP ANIMATION
             animator.SetTrigger("UseRT"); // PICKUP ANIMATION
 
@@ -177,6 +178,10 @@ public class PlayerController : MonoBehaviour
 
             Debug.Log(health);
 
+            if (playerNumber == 1)
+                SoundManager.Instance.PlaySFX("Hurt_male", SoundManager.DefaultTypes.Damage);
+            else
+                SoundManager.Instance.PlaySFX("Hurt_female", SoundManager.DefaultTypes.Damage);
             animator.SetTrigger("Hit"); // HIT ANIMATION
 
             ChestOpening.Instance.PotentialRestart(transform);
@@ -189,6 +194,10 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
+        if (playerNumber == 1)
+            SoundManager.Instance.PlaySFX("Death_male", SoundManager.DefaultTypes.Death);
+        else
+            SoundManager.Instance.PlaySFX("Death_female", SoundManager.DefaultTypes.Death);
         animator.SetBool("Alive", false); // Death animation
         dead = true;
     }

@@ -19,7 +19,8 @@ public class SoundManager : MonoBehaviour
         Any,
         UseItem,
         Death,
-        Win
+        Win,
+        Damage
     }
 
     #region Singleton
@@ -39,6 +40,7 @@ public class SoundManager : MonoBehaviour
     public List<SoundEffect> Items;
     public List<SoundEffect> Deaths;
     public List<SoundEffect> Wins;
+    public List<SoundEffect> Damage;
 
     public bool VolumeToggle
     {
@@ -110,9 +112,15 @@ public class SoundManager : MonoBehaviour
 
     #region Public Methods
 
-    public void PlaySFX(string soundName, float volume = 1f, DefaultTypes type = DefaultTypes.Any)
+    public void PlaySFX(string soundName, DefaultTypes type = DefaultTypes.Any, float volume = 1f)
     {
         AudioClip clip = GetSound(soundName, type);
+
+        if (clip) SFX.PlayOneShot(clip, volume);
+    }
+    public void PlayRandomSFX( DefaultTypes type, float volume = 1f)
+    {
+        AudioClip clip = GetRandomSound(type);
 
         if (clip) SFX.PlayOneShot(clip, volume);
     }
@@ -182,6 +190,9 @@ public class SoundManager : MonoBehaviour
                 break;
             case DefaultTypes.Win:
                 searchList = Wins;
+                break;
+            case DefaultTypes.Damage:
+                searchList = Damage;
                 break;
             default:
                 searchList = Clips;
