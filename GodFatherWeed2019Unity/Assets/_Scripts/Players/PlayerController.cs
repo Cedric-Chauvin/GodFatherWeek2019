@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private Camera viewCamera;
     public Animator animator;
 
+    public ChestOpening chest_opening;
+
     [field: Header("Number of the player, corresponds to the controller"), SerializeField]
     public int playerNumber { get; private set; } = 1;
 
@@ -218,6 +220,12 @@ public class PlayerController : MonoBehaviour
             SoundManager.Instance.PlaySFX("Death_female", SoundManager.DefaultTypes.Death);
         animator.SetBool("Alive", false); // Death animation
         dead = true;
+        foreach (var pc in _players)
+        {
+            if (pc != this) chest_opening.Victory(pc);
+        }
+        
+        
     }
 
     public void StunPlayer(float time)

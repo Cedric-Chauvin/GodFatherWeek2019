@@ -8,40 +8,7 @@ public class PauseMenu : MonoBehaviour {
 	public static bool GameIsPaused = false;
 
 	public GameObject playMenuUI;
-	public GameObject pauseMenuUI;
-	public GameObject optionsMenuUI;
 	
-	private void Update () {
-		if (Input.GetKeyDown (KeyCode.Escape))
-		{
-			if (GameIsPaused) {
-				Resume ();
-			} else {
-				Pause ();
-			}
-		}
-	}
-
-	public void Resume()
-	{
-		playMenuUI.SetActive (true);
-		pauseMenuUI.SetActive (false);
-		optionsMenuUI.SetActive (false);
-
-		Time.timeScale = 1f;
-		GameIsPaused = false;
-	}
-
-	public void Pause()
-	{
-		playMenuUI.SetActive (false);
-		pauseMenuUI.SetActive (true);
-		optionsMenuUI.SetActive (false);
-
-		Time.timeScale = 0f;
-		GameIsPaused = true;
-	}
-
 	public void LoadMenu()
 	{
 		Debug.Log ("Loading menu ...");

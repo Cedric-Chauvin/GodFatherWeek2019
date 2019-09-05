@@ -84,7 +84,7 @@ public class SoundManager : MonoBehaviour
         // Prevent duplication of SoundManager
         if (Instance != null)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
             return;
         }
 
