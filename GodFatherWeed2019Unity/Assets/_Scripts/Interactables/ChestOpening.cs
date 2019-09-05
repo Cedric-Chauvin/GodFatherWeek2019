@@ -57,7 +57,7 @@ public class ChestOpening : MonoBehaviour
             startTime = Time.time;
             timerheld = Time.time;
         }
-        else if (holding && Input.GetAxis("P" + playerNumber + "_Action_Axis") != -1f)
+        else if (holding && Input.GetAxis("P" + playerNumber + "_Action_Axis") != -1f && player.playerNumber == playerNumber)
         {
             holding = false;
             Debug.Log("not holding");
