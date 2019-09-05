@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Applying movement;
-        rigidBody.velocity = new Vector3(inputHorizontal * moveSpeed * Time.deltaTime, rigidBody.velocity.y, inputVertical * moveSpeed * Time.deltaTime);
+        rigidBody.velocity = new Vector3(Mathf.Clamp(inputHorizontal, -1, 1) * moveSpeed * Time.deltaTime, rigidBody.velocity.y, Mathf.Clamp(inputVertical, -1, 1) * moveSpeed * Time.deltaTime);
 
         // Make current item follow player
         if (currentItem)
