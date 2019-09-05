@@ -11,6 +11,7 @@ public class MunCanne : MonoBehaviour
     private Vector3 dir;
     private bool retour;
     private Transform target;
+    private bool haveDamage;
 
     private void Update()
     {
@@ -36,7 +37,12 @@ public class MunCanne : MonoBehaviour
                 if ((Pos - item.transform.position).magnitude <= 0.5)
                 {
                     target = item.transform;
-                    item.Damage(damage);
+                    if (!haveDamage)
+                    {
+                        item.Damage(damage);
+                        haveDamage = true;
+                    }
+                    
                     retour = true;
                 }
             }

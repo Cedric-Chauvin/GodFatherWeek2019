@@ -14,10 +14,11 @@ public class AppareilPhoto : ObjectBase
         {
             if (myPLayer != Player)
             {
-                Vector3 direction = myPLayer.transform.InverseTransformPoint(Player.transform.position);
-                float angle = Mathf.Atan2(direction.x, direction.z);
-
-                if (Mathf.Abs(angle) > flashAngle && direction.magnitude < flashRange)
+                Vector3 direction = (Player.transform.position) - myPLayer.transform.position;
+                direction = new Vector3(direction.x, 0, direction.z);
+                float angle = Vector3.Angle(myPLayer.transform.forward, direction);
+                Debug.Log(angle);
+                if (Mathf.Abs(angle) < flashAngle && direction.magnitude < flashRange)
                 {
                     Debug.Log("Object TODO: Flash!");
                 }
