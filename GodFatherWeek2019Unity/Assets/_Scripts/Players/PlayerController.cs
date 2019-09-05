@@ -208,7 +208,10 @@ public class PlayerController : MonoBehaviour
                 SoundManager.Instance.PlaySFX("Hurt_male", SoundManager.DefaultTypes.Damage);
             else
                 SoundManager.Instance.PlaySFX("Hurt_female", SoundManager.DefaultTypes.Damage);
+
             animator.SetTrigger("Hit"); // HIT ANIMATION
+
+            StartCoroutine(Camera.main.GetComponent<CameraShake>().Shake());
 
             ChestOpening.Instance.PotentialRestart(transform);
 
