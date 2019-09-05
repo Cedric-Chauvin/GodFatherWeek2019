@@ -130,6 +130,8 @@ public class PlayerController : MonoBehaviour
 
     private void Interactions()
     {
+        Debug.Log(itemInRange);
+
         if (currentItem && Input.GetAxis("P" + playerNumber + "_Action_Axis") == 1f && Time.time > (lastPickupTime + beforeUseCooldown))
         {
             if (currentItem.Utilisation(transform.rotation.eulerAngles.y, this))
@@ -139,6 +141,10 @@ public class PlayerController : MonoBehaviour
         {
             lastPickupTime = Time.time;
             currentItem = itemInRange;
+
+            // Remove picked up item from in range, from all players
+            foreach (PlayerController pc in _players)
+                pc.SetItemInRange(null);            
 
             // Remove pickup script from current item
             Destroy(currentItem.gameObject.GetComponent<ObjectPickUp>());

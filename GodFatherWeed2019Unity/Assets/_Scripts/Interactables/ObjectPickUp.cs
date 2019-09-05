@@ -28,7 +28,7 @@ public class ObjectPickUp : MonoBehaviour
         {
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
 
-            if (player.GetItemInRange() == this)
+            if (player.GetItemInRange() == scriptObj)
                 player.SetItemInRange(null);
 
         }
@@ -41,7 +41,7 @@ public class ObjectPickUp : MonoBehaviour
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
             ObjectBase inRangePlayer = player.GetItemInRange();
 
-                if (inRangePlayer != null)
+                if (inRangePlayer != null && inRangePlayer != scriptObj)
                 {
                     if (Mathf.Abs(Vector3.SqrMagnitude(player.transform.position - inRangePlayer.transform.position)) > Mathf.Abs(Vector3.SqrMagnitude(player.transform.position - transform.position)))
                     {
