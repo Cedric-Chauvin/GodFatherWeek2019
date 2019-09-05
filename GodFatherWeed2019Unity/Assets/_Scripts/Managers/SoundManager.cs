@@ -75,6 +75,10 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
+        // Last minute code!
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+
         // Prevent duplication of SoundManager
         if (Instance != null)
         {
