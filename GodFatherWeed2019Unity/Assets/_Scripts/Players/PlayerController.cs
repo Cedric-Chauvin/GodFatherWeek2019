@@ -171,9 +171,12 @@ public class PlayerController : MonoBehaviour
         {
             lastDamageTime = Time.time;
             health -= dmg;
+
             Debug.Log(health);
 
             animator.SetTrigger("Hit"); // HIT ANIMATION
+
+            ChestOpening.Instance.PotentialRestart(transform);
 
             if (health <= 0f) Die();
         }
