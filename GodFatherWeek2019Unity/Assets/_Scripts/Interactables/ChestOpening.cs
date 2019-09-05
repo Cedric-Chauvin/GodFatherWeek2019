@@ -13,6 +13,7 @@ public class ChestOpening : MonoBehaviour
     private int rng;
     private bool held = false;
     private bool holding = false;
+    public Image image;
 
     [Range(1, 10)]
     public int minTime = 4;
@@ -27,6 +28,7 @@ public class ChestOpening : MonoBehaviour
 
     private void Awake()
     {
+        image.fillAmount = 0;
         Instance = this;
 
         System.Random random = new System.Random();
@@ -41,10 +43,13 @@ public class ChestOpening : MonoBehaviour
 
         timerheld = 0;
         startTime = 0;
+        image.gameObject.SetActive(false);
     }
     private void OnTriggerStay(Collider other)
     {
         if (!other.gameObject.tag.Equals("Player")) return;
+
+        image.gameObject.SetActive(true);
 
         int playerNumber = other.gameObject.GetComponent<PlayerController>().playerNumber;
 
@@ -60,6 +65,7 @@ public class ChestOpening : MonoBehaviour
         }
         else if (holding && Input.GetAxis("P" + playerNumber + "_Action_Axis") != -1f && player.playerNumber == playerNumber)
         {
+            image.transform.GetChild(0).GetComponent<Image>().fillAmount = 0;
             holding = false;
             Debug.Log("not holding");
         }
@@ -69,6 +75,7 @@ public class ChestOpening : MonoBehaviour
         {
             timerheld += Time.deltaTime;
 
+            image.transform.GetChild(0).GetComponent<Image>().fillAmount = (timerheld - startTime) / rng;
             // Once the timer float has added on the required holdTime, changes the bool (for a single trigger), and calls the function
             if (timerheld > (startTime + rng))
             {
