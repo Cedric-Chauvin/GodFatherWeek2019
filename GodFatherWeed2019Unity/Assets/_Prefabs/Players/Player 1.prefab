@@ -75,6 +75,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba1a31de22c90ab4ab2b30a9c8ede372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  chest_opening: {fileID: 0}
   <playerNumber>k__BackingField: 1
   keyboard: 0
   deadzone: 0.1
@@ -82,6 +84,8 @@ MonoBehaviour:
   pickupCooldown: 4
   damageCooldown: 0.5
   beforeUseCooldown: 1
+  Ammo: {fileID: 0}
+  HP: {fileID: 0}
 --- !u!1001 &9116987453630836425
 PrefabInstance:
   m_ObjectHideFlags: 0
