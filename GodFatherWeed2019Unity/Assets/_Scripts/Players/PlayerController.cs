@@ -144,7 +144,7 @@ public class PlayerController : MonoBehaviour
 
             // Remove picked up item from in range, from all players
             foreach (PlayerController pc in _players)
-                pc.SetItemInRange(null);            
+                if (pc.GetItemInRange() == currentItem) pc.SetItemInRange(null);          
 
             // Remove pickup script from current item
             Destroy(currentItem.gameObject.GetComponent<ObjectPickUp>());
