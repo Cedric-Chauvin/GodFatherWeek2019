@@ -196,6 +196,7 @@ public class PlayerController : MonoBehaviour
     public void StunPlayer(float time)
     {
         stun = true;
+        animator.SetTrigger("Stun");
         ChestOpening.Instance.PotentialRestart(transform);
         Invoke("DeStunPlayer", time);
     }
