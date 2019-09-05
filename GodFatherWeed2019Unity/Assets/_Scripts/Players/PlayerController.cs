@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     [field: Header("Health")]
     public float health { get; private set; } = 100f;
     private bool dead = false;
+    private bool stun = false;
 
     private void OnDestroy()
     {
@@ -64,6 +65,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         if (dead) return;
+
+        if (stun) return;
 
         MovementAndOrientation();
 
@@ -188,5 +191,18 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("Alive", false); // Death animation
         dead = true;
+    }
+
+    public void StunPlayer(float time)
+    {
+        stun = true;
+        ChestOpening.Instance.PotentialRestart(transform);
+        Invoke("DeStunPlayer", time);
+    }
+
+    public void DeStunPlayer()
+    {
+        ChestOpening.Instance.PotentialRestart(transform);
+        stun = false;
     }
 }
