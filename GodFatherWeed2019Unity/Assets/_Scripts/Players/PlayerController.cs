@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement related settings")]
     public float deadzone = 0.1f;
-    [Range(500f, 1500f)]
-    public float moveSpeed = 500f;
+    [Range(1f, 10f)]
+    public float moveSpeed = 4f;
 
     [Header("Items")]
     private ObjectBase itemInRange;
@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Applying movement;
-        rigidBody.velocity = new Vector3(Mathf.Clamp(inputHorizontal, -1, 1) * moveSpeed * Time.deltaTime, rigidBody.velocity.y, Mathf.Clamp(inputVertical, -1, 1) * moveSpeed * Time.deltaTime);
+        rigidBody.velocity = new Vector3(Mathf.Clamp(inputHorizontal, -1, 1) * moveSpeed, rigidBody.velocity.y, Mathf.Clamp(inputVertical, -1, 1) * moveSpeed);
 
         // Make current item follow player
         if (currentItem)

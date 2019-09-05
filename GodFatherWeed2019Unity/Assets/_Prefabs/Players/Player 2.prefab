@@ -827,7 +827,7 @@ MonoBehaviour:
   <playerNumber>k__BackingField: 2
   keyboard: 0
   deadzone: 0.1
-  moveSpeed: 500
+  moveSpeed: 4
   pickupCooldown: 4
   damageCooldown: 0.5
   beforeUseCooldown: 1
