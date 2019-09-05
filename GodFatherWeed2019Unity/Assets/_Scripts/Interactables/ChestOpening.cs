@@ -81,7 +81,8 @@ public class ChestOpening : MonoBehaviour
     // Method called after held for required time
     private void ButtonHeld()
     {
-        SoundManager.Instance.PlaySFX("Chest_open", SoundManager.DefaultTypes.UseItem);
+        StartCoroutine(PlayEndSounds());
+
         Debug.Log("Held for " + rng + " seconds");
 
         Victory();
@@ -89,7 +90,7 @@ public class ChestOpening : MonoBehaviour
 
     public void Victory(PlayerController pc = null)
     {
-        SoundManager.Instance.PlayRandomSFX(SoundManager.DefaultTypes.Win);
+        
         Debug.Log("Victory!");
 
         if (pc == null)
@@ -105,5 +106,12 @@ public class ChestOpening : MonoBehaviour
     public void PotentialRestart(Transform player)
     {
         if (this.player != null && player == this.player.transform) holding = false;
+    }
+
+    IEnumerator PlayEndSounds()
+    {
+        SoundManager.Instance.PlaySFX("Chest_open", SoundManager.DefaultTypes.UseItem);
+        yield return new WaitForSecondsRealtime(1.985f);
+        SoundManager.Instance.PlayRandomSFX(SoundManager.DefaultTypes.Win);
     }
 }
