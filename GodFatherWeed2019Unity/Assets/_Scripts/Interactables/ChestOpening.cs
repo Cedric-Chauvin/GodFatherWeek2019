@@ -98,9 +98,6 @@ public class ChestOpening : MonoBehaviour
 
     public void PotentialRestart(Transform player)
     {
-        if (player != this.player.transform) holding = false;
+        if (this.player != null && player == this.player.transform) holding = false;
     }
 }
-
-        else if (holding && Input.GetAxis("P" + playerNumber + "_Action_Axis") != -1f && player.playerNumber == playerNumber)
-        {

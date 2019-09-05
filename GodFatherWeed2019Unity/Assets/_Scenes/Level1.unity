@@ -1179,7 +1179,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Next Level
+  m_Text: Restart Level
 --- !u!222 &635288665
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2900,6 +2900,7 @@ MonoBehaviour:
   victoryui: {fileID: 146985996}
   gameui: {fileID: 143480228}
   animator: {fileID: 0}
+  player: {fileID: 0}
 --- !u!65 &1458025923
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3402,7 +3403,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1428612986}
-        m_MethodName: NextLevel
+        m_MethodName: RestartLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
