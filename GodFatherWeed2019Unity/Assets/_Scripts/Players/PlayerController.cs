@@ -73,9 +73,15 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         if (currentItem != null)
+        {
             Ammo.text = currentItem.nbUtilisation.ToString();
+            transform.GetChild(1).gameObject.SetActive(true);
+        }
         else
+        {
             Ammo.text = "0";
+            transform.GetChild(1).gameObject.SetActive(false);
+        }
 
         if (dead) return;
 
