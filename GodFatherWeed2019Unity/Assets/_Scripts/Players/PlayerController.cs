@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -39,8 +40,13 @@ public class PlayerController : MonoBehaviour
 
     [field: Header("Health")]
     public float health { get; private set; } = 100f;
+    private float maxHealth; 
     private bool dead = false;
     private bool stun = false;
+
+    [Header("UI")]
+    public Text Ammo;
+    public Image HP;
 
     private void OnDestroy()
     {
@@ -60,10 +66,17 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         _players.Add(this);
+        Ammo.text = "0";
+        maxHealth = health;
     }
 
     private void Update()
     {
+        if (currentItem != null)
+            Ammo.text = currentItem.nbUtilisation.ToString();
+        else
+            Ammo.text = "0";
+
         if (dead) return;
 
         if (stun) return;
@@ -174,6 +187,11 @@ public class PlayerController : MonoBehaviour
         {
             lastDamageTime = Time.time;
             health -= dmg;
+
+            if (health <= 0)
+                health = 0;
+
+            HP.fillAmount = health / maxHealth;
 
             Debug.Log(health);
 
