@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cece09420e67714c983f72e67c1fb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempsSpawn: {x: 2, y: 120}
+  tempsSpawn: {x: 2, y: 200}
   transforms:
   - {fileID: 5920939571736723127, guid: 5f20bc615207cb9418708f0a7b38a6d9, type: 3}
   - {fileID: 4920298154650521272, guid: a28f44a75b045c046822bbbd0e49cacb, type: 3}
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cece09420e67714c983f72e67c1fb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempsSpawn: {x: 2, y: 120}
+  tempsSpawn: {x: 2, y: 200}
   transforms:
   - {fileID: 5920939571736723127, guid: 5f20bc615207cb9418708f0a7b38a6d9, type: 3}
   - {fileID: 4920298154650521272, guid: a28f44a75b045c046822bbbd0e49cacb, type: 3}
@@ -403,7 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cece09420e67714c983f72e67c1fb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempsSpawn: {x: 2, y: 120}
+  tempsSpawn: {x: 2, y: 200}
   transforms:
   - {fileID: 5920939571736723127, guid: 5f20bc615207cb9418708f0a7b38a6d9, type: 3}
   - {fileID: 4920298154650521272, guid: a28f44a75b045c046822bbbd0e49cacb, type: 3}
@@ -463,7 +463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cece09420e67714c983f72e67c1fb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempsSpawn: {x: 2, y: 120}
+  tempsSpawn: {x: 2, y: 200}
   transforms:
   - {fileID: 5920939571736723127, guid: 5f20bc615207cb9418708f0a7b38a6d9, type: 3}
   - {fileID: 4920298154650521272, guid: a28f44a75b045c046822bbbd0e49cacb, type: 3}
@@ -877,7 +877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cece09420e67714c983f72e67c1fb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempsSpawn: {x: 2, y: 120}
+  tempsSpawn: {x: 2, y: 200}
   transforms:
   - {fileID: 5920939571736723127, guid: 5f20bc615207cb9418708f0a7b38a6d9, type: 3}
   - {fileID: 4920298154650521272, guid: a28f44a75b045c046822bbbd0e49cacb, type: 3}
@@ -937,7 +937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cece09420e67714c983f72e67c1fb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempsSpawn: {x: 2, y: 120}
+  tempsSpawn: {x: 2, y: 200}
   transforms:
   - {fileID: 5920939571736723127, guid: 5f20bc615207cb9418708f0a7b38a6d9, type: 3}
   - {fileID: 4920298154650521272, guid: a28f44a75b045c046822bbbd0e49cacb, type: 3}
@@ -1237,7 +1237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cece09420e67714c983f72e67c1fb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempsSpawn: {x: 2, y: 20}
+  tempsSpawn: {x: 1, y: 5}
   transforms:
   - {fileID: 5920939571736723127, guid: 5f20bc615207cb9418708f0a7b38a6d9, type: 3}
   - {fileID: 4920298154650521272, guid: a28f44a75b045c046822bbbd0e49cacb, type: 3}
@@ -1357,7 +1357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cece09420e67714c983f72e67c1fb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempsSpawn: {x: 2, y: 200}
+  tempsSpawn: {x: 1, y: 5}
   transforms:
   - {fileID: 5920939571736723127, guid: 5f20bc615207cb9418708f0a7b38a6d9, type: 3}
   - {fileID: 4920298154650521272, guid: a28f44a75b045c046822bbbd0e49cacb, type: 3}

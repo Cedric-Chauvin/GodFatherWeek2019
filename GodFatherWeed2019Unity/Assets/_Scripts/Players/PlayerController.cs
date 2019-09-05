@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rigidBody;
     private Camera viewCamera;
-    private Animator animator;
+    public Animator animator;
 
     [field: Header("Number of the player, corresponds to the controller"), SerializeField]
     public int playerNumber { get; private set; } = 1;
@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     [field: Header("Health")]
     public float health { get; private set; } = 100f;
     private bool dead = false;
+    private bool stun = false;
 
     private void OnDestroy()
     {
@@ -64,6 +65,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         if (dead) return;
+
+        if (stun) return;
 
         MovementAndOrientation();
 
@@ -130,7 +133,6 @@ public class PlayerController : MonoBehaviour
 
     private void Interactions()
     {
-        Debug.Log(itemInRange);
 
         if (currentItem && Input.GetAxis("P" + playerNumber + "_Action_Axis") == 1f && Time.time > (lastPickupTime + beforeUseCooldown))
         {
@@ -150,7 +152,7 @@ public class PlayerController : MonoBehaviour
             Destroy(currentItem.gameObject.GetComponent<ObjectPickUp>());
 
             animator.SetBool("InRange", true); // PICKUP ANIMATION
-            animator.SetTrigger("UseRT"); // PICKUP ANOIMATION
+            animator.SetTrigger("UseRT"); // PICKUP ANIMATION
 
             animator.SetBool("InRange", false); // RESET MULTI CONDITION
         }
@@ -172,9 +174,12 @@ public class PlayerController : MonoBehaviour
         {
             lastDamageTime = Time.time;
             health -= dmg;
+
             Debug.Log(health);
 
             animator.SetTrigger("Hit"); // HIT ANIMATION
+
+            ChestOpening.Instance.PotentialRestart(transform);
 
             if (health <= 0f) Die();
         }
@@ -186,5 +191,19 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("Alive", false); // Death animation
         dead = true;
+    }
+
+    public void StunPlayer(float time)
+    {
+        stun = true;
+        animator.SetTrigger("Stun");
+        ChestOpening.Instance.PotentialRestart(transform);
+        Invoke("DeStunPlayer", time);
+    }
+
+    public void DeStunPlayer()
+    {
+        ChestOpening.Instance.PotentialRestart(transform);
+        stun = false;
     }
 }

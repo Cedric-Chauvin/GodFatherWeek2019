@@ -7,9 +7,11 @@ public class AppareilPhoto : ObjectBase
     [Header("Flash")]
     public float flashRange;
     public float flashAngle;
+    public float StunTime;
 
     public override void Capacité(float dir)
     {
+        base.Capacité(dir);
         foreach (var Player in PlayerController._players)
         {
             if (myPLayer != Player)
@@ -20,7 +22,7 @@ public class AppareilPhoto : ObjectBase
                 Debug.Log(angle);
                 if (Mathf.Abs(angle) < flashAngle && direction.magnitude < flashRange)
                 {
-                    Debug.Log("Object TODO: Flash!");
+                    Player.StunPlayer(StunTime);
                 }
             }
         }

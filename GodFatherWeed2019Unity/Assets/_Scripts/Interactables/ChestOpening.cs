@@ -23,6 +23,7 @@ public class ChestOpening : MonoBehaviour
     public GameObject gameui;
 
     public Animator animator;
+    public PlayerController player;
 
     private void Awake()
     {
@@ -45,24 +46,25 @@ public class ChestOpening : MonoBehaviour
     {
         if (!other.gameObject.tag.Equals("Player")) return;
 
-        animator = other.gameObject.GetComponentInChildren<Animator>();
         int playerNumber = other.gameObject.GetComponent<PlayerController>().playerNumber;
 
         if (Input.GetAxis("P" + playerNumber + "_Action_Axis") == -1f && other.gameObject.tag.Equals("Player") && !holding)
         {
+            player = other.gameObject.GetComponent<PlayerController>();
+            animator = other.gameObject.GetComponentInChildren<Animator>();
+
             holding = true;
-            Debug.Log("holding");
             startTime = Time.time;
             timerheld = Time.time;
         }
-        else if (holding && Input.GetAxis("P" + playerNumber + "_Action_Axis") != -1f)
+        else if (holding && Input.GetAxis("P" + playerNumber + "_Action_Axis") != -1f && player.playerNumber == playerNumber)
         {
             holding = false;
             Debug.Log("not holding");
         }
 
         // Adds time onto the timer so long as the key is pressed
-        if (Input.GetAxis("P" + playerNumber + "_Action_Axis") == -1f && held == false)
+        if (Input.GetAxis("P" + playerNumber + "_Action_Axis") == -1f && held == false && player.playerNumber == playerNumber)
         {
             timerheld += Time.deltaTime;
 
@@ -91,5 +93,11 @@ public class ChestOpening : MonoBehaviour
 
         gameui.SetActive(false);
         victoryui.SetActive(true);
+    }
+
+
+    public void PotentialRestart(Transform player)
+    {
+        if (this.player != null && player == this.player.transform) holding = false;
     }
 }
