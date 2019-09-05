@@ -8,9 +8,15 @@ public class ObjectPickUp : MonoBehaviour
 
     private ObjectBase scriptObj;
 
-    private void Start()
+    public Transform Light { get; private set; }
+    public Transform Particles { get; private set; }
+
+    private void Awake()
     {
         scriptObj = GetComponent<ObjectBase>();
+
+        Light = GetComponentInChildren<ParticleSystem>().transform;
+        Particles = GetComponentInChildren<Light>().transform;
     }
 
     private void OnTriggerEnter(Collider collision)

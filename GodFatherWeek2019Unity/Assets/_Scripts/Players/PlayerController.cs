@@ -167,10 +167,13 @@ public class PlayerController : MonoBehaviour
 
             // Remove picked up item from in range, from all players
             foreach (PlayerController pc in _players)
-                if (pc.GetItemInRange() == currentItem) pc.SetItemInRange(null);          
+                if (pc.GetItemInRange() == currentItem) pc.SetItemInRange(null);
 
-            // Remove pickup script from current item
-            Destroy(currentItem.gameObject.GetComponent<ObjectPickUp>());
+            // Remove pickup script and light and particles from current item
+            ObjectPickUp pk = currentItem.gameObject.GetComponent<ObjectPickUp>();
+            Destroy(pk.Light.gameObject);
+            Destroy(pk.Particles.gameObject);
+            Destroy(pk);
 
             SoundManager.Instance.PlaySFX("Pickup", SoundManager.DefaultTypes.UseItem);
             animator.SetBool("InRange", true); // PICKUP ANIMATION
