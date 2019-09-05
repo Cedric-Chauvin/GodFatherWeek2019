@@ -52,6 +52,7 @@ public class ChestOpening : MonoBehaviour
         {
             player = other.gameObject.GetComponent<PlayerController>();
             animator = other.gameObject.GetComponentInChildren<Animator>();
+            SoundManager.Instance.PlaySFX("Chest_lock", SoundManager.DefaultTypes.UseItem);
 
             holding = true;
             startTime = Time.time;
@@ -80,6 +81,7 @@ public class ChestOpening : MonoBehaviour
     // Method called after held for required time
     private void ButtonHeld()
     {
+        SoundManager.Instance.PlaySFX("Chest_open", SoundManager.DefaultTypes.UseItem);
         Debug.Log("Held for " + rng + " seconds");
 
         Victory();
@@ -87,6 +89,7 @@ public class ChestOpening : MonoBehaviour
 
     public void Victory()
     {
+        SoundManager.Instance.PlayRandomSFX(SoundManager.DefaultTypes.Win);
         Debug.Log("Victory!");
 
         animator.SetBool("Win", true); // VICTORY ANIMATION

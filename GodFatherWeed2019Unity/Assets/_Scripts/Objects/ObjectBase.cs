@@ -58,6 +58,7 @@ public class ObjectBase : MonoBehaviour
 
     public virtual void Lancer(float dir)
     {
+        SoundManager.Instance.PlaySFX("Throw", SoundManager.DefaultTypes.UseItem);
         myPLayer.animator.SetTrigger("UseRT");
         transform.rotation = Quaternion.Euler(0, dir, 0);
         Vector3 temp = transform.InverseTransformDirection(0, 0, speed);

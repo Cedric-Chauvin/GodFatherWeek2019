@@ -20,6 +20,7 @@ public class AppareilPhoto : ObjectBase
                 direction = new Vector3(direction.x, 0, direction.z);
                 float angle = Vector3.Angle(myPLayer.transform.forward, direction);
                 Debug.Log(angle);
+                SoundManager.Instance.PlaySFX("Flash", SoundManager.DefaultTypes.UseItem);
                 if (Mathf.Abs(angle) < flashAngle && direction.magnitude < flashRange)
                 {
                     Player.StunPlayer(StunTime);
