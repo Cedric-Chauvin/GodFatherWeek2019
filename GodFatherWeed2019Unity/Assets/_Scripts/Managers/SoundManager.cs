@@ -84,7 +84,7 @@ public class SoundManager : MonoBehaviour
         // Prevent duplication of SoundManager
         if (Instance != null)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
             return;
         }
 
@@ -169,7 +169,7 @@ public class SoundManager : MonoBehaviour
         if (searchList.Count > 0)
         {
             System.Random rng = new System.Random();
-            int random = rng.Next(0, searchList.Count + 1);
+            int random = rng.Next(0, searchList.Count);
 
             return searchList[random].File;
         }

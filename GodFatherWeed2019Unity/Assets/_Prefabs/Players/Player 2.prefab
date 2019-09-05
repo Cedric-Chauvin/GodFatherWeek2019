@@ -906,6 +906,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  chest_opening: {fileID: 0}
   <playerNumber>k__BackingField: 2
   keyboard: 0
   deadzone: 0.1

@@ -87,12 +87,15 @@ public class ChestOpening : MonoBehaviour
         Victory();
     }
 
-    public void Victory()
+    public void Victory(PlayerController pc = null)
     {
         SoundManager.Instance.PlayRandomSFX(SoundManager.DefaultTypes.Win);
         Debug.Log("Victory!");
 
-        animator.SetBool("Win", true); // VICTORY ANIMATION
+        if (pc == null)
+            animator.SetBool("Win", true); // VICTORY ANIMATION
+        else
+            pc.animator.SetBool("Win", true);
 
         gameui.SetActive(false);
         victoryui.SetActive(true);
