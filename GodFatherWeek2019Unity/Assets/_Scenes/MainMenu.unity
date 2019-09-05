@@ -327,6 +327,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114196318800474302, guid: 72cce58510c78d845a36f8e29352c021,
+        type: 3}
+      propertyPath: credits
+      value: 
+      objectReference: {fileID: 1573107744}
+    - target: {fileID: 1961567057505188, guid: 72cce58510c78d845a36f8e29352c021, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72cce58510c78d845a36f8e29352c021, type: 3}
 --- !u!1 &919427676
@@ -395,6 +404,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1573107744 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1961567057505188, guid: 72cce58510c78d845a36f8e29352c021,
+    type: 3}
+  m_PrefabInstance: {fileID: 407082181}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2049710551
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,9 +15,13 @@ public class MenuManager : MonoBehaviour
     public void OpenScreen()
     {
         if (isCredit)
+        {
             animator.SetBool("creditstart", true);
+            animator.SetBool("creditsclose", false);
+        }
         else
             animator.SetBool("introstart", true);
+            
         animator.SetBool("menuclose", false);
     }
 
