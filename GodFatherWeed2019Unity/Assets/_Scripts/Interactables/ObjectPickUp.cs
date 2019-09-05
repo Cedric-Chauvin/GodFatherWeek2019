@@ -55,9 +55,4 @@ public class ObjectPickUp : MonoBehaviour
                 }
         }
     }
-
-    public void RemoveItem()
-    {
-        Destroy(gameObject);
-    }
 }

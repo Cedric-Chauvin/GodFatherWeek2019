@@ -140,6 +140,9 @@ public class PlayerController : MonoBehaviour
             lastPickupTime = Time.time;
             currentItem = itemInRange;
 
+            // Remove pickup script from current item
+            Destroy(currentItem.gameObject.GetComponent<ObjectPickUp>());
+
             animator.SetBool("InRange", true); // PICKUP ANIMATION
             animator.SetTrigger("UseRT"); // PICKUP ANOIMATION
 
