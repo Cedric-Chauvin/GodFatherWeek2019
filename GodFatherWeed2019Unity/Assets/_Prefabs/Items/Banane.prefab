@@ -166,8 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e65645f50e6fb4482d92fbae219744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  distanceMax: 2.5
+  speed: 15
+  distanceMax: 15
   poids: 0
   dommage: 5
   nbUtilisation: 1

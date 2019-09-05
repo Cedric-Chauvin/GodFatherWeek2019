@@ -12,6 +12,7 @@ public class ChestOpening : MonoBehaviour
     private float timerheld = 0f;
     private int rng;
     private bool held = false;
+    private bool holding = false;
 
     [Range(1, 10)]
     public int minTime = 4;
@@ -31,8 +32,10 @@ public class ChestOpening : MonoBehaviour
         rng = random.Next(minTime, maxTime);
         Debug.Log(rng);
     }
-    private void OnTriggerExit()
+    private void OnTriggerExit(Collider other)
     {
+        if (!other.gameObject.tag.Equals("Player")) return;
+
         held = false;
 
         timerheld = 0;
@@ -40,20 +43,28 @@ public class ChestOpening : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
+        if (!other.gameObject.tag.Equals("Player")) return;
+
         animator = other.gameObject.GetComponentInChildren<Animator>();
         int playerNumber = other.gameObject.GetComponent<PlayerController>().playerNumber;
 
-        if (Input.GetAxis("P" + playerNumber + "_Action_Axis") == -1f && other.gameObject.tag.Equals("Player"))
+        if (Input.GetAxis("P" + playerNumber + "_Action_Axis") == -1f && other.gameObject.tag.Equals("Player") && !holding)
         {
+            holding = true;
+            Debug.Log("holding");
             startTime = Time.time;
             timerheld = Time.time;
+        }
+        else if (holding && Input.GetAxis("P" + playerNumber + "_Action_Axis") != -1f)
+        {
+            holding = false;
+            Debug.Log("not holding");
         }
 
         // Adds time onto the timer so long as the key is pressed
         if (Input.GetAxis("P" + playerNumber + "_Action_Axis") == -1f && held == false)
         {
             timerheld += Time.deltaTime;
-            Debug.Log(timerheld);
 
             // Once the timer float has added on the required holdTime, changes the bool (for a single trigger), and calls the function
             if (timerheld > (startTime + rng))

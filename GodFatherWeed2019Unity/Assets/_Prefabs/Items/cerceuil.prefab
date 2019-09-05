@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  distanceMax: 1
+  distanceMax: 2
   poids: 0
   dommage: 90
   nbUtilisation: 1
