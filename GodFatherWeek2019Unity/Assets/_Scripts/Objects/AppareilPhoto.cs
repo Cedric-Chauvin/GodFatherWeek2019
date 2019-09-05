@@ -8,6 +8,7 @@ public class AppareilPhoto : ObjectBase
     public float flashRange;
     public float flashAngle;
     public float StunTime;
+    public Transform Particule;
 
     public override void Capacité(float dir)
     {
@@ -24,6 +25,8 @@ public class AppareilPhoto : ObjectBase
                 if (Mathf.Abs(angle) < flashAngle && direction.magnitude < flashRange)
                 {
                     Player.StunPlayer(StunTime);
+                    Transform instance = Instantiate(Particule, transform.position+transform.InverseTransformDirection(0,0,-2), transform.rotation);
+                    Destroy(instance.gameObject, 2);
                 }
             }
         }
