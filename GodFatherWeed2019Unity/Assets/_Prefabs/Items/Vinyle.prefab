@@ -80,7 +80,7 @@ MonoBehaviour:
   speed: 15
   distanceMax: 10
   poids: 0
-  dommage: 50
+  dommage: 25
   nbUtilisation: 1
   cooldownPickup: 2
   cooldownUtilisation: 0

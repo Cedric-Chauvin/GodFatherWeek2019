@@ -62,7 +62,7 @@ MonoBehaviour:
   speed: 12.5
   distanceMax: 5
   poids: 10
-  dommage: 25
+  dommage: 5
   nbUtilisation: 1
   cooldownPickup: 0
   cooldownUtilisation: 0

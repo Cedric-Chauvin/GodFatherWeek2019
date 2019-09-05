@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rigidBody;
     private Camera viewCamera;
-    private Animator animator;
+    public Animator animator;
 
     [field: Header("Number of the player, corresponds to the controller"), SerializeField]
     public int playerNumber { get; private set; } = 1;
@@ -130,7 +130,6 @@ public class PlayerController : MonoBehaviour
 
     private void Interactions()
     {
-        Debug.Log(itemInRange);
 
         if (currentItem && Input.GetAxis("P" + playerNumber + "_Action_Axis") == 1f && Time.time > (lastPickupTime + beforeUseCooldown))
         {
@@ -150,7 +149,7 @@ public class PlayerController : MonoBehaviour
             Destroy(currentItem.gameObject.GetComponent<ObjectPickUp>());
 
             animator.SetBool("InRange", true); // PICKUP ANIMATION
-            animator.SetTrigger("UseRT"); // PICKUP ANOIMATION
+            animator.SetTrigger("UseRT"); // PICKUP ANIMATION
 
             animator.SetBool("InRange", false); // RESET MULTI CONDITION
         }
